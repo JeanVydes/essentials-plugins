@@ -1,0 +1,40 @@
+//! Browser automation plugin for Norte Code.
+//!
+//! The CDP executor stays in Norte's `norte-tools` crate. This plugin only
+//! hands its tool to the host, which registers it like any other tool.
+
+use std::sync::Arc;
+
+use norte::AnyFunction;
+use norte_code_plugin_host::plugins::{PLUGIN_ABI_VERSION, Plugin};
+use norte_tools::browser_tool;
+
+#[derive(Default)]
+struct BrowserPlugin;
+
+impl Plugin for BrowserPlugin {
+    fn name(&self) -> &'static str {
+        "browser"
+    }
+
+    fn tools(&self) -> Vec<Arc<dyn AnyFunction>> {
+        vec![browser_tool()]
+    }
+}
+
+/// Exports the plugin interface version expected by Norte Code.
+#[unsafe(no_mangle)]
+pub extern "C" fn norte_plugin_abi_version() -> u32 {
+    PLUGIN_ABI_VERSION
+}
+
+/// Constructs the plugin for the host loader.
+#[allow(improper_ctypes_definitions)]
+#[unsafe(no_mangle)]
+pub extern "C" fn create_plugin() -> *mut dyn Plugin {
+    Box::into_raw(Box::new(BrowserPlugin))
+}
+
+#[cfg(test)]
+#[path = "lib_tests.rs"]
+mod tests;

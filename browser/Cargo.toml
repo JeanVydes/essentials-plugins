@@ -1,0 +1,22 @@
+[package]
+name = "essentials-plugin-browser"
+description = "Browser automation plugin for Norte Code"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+norte.workspace = true
+norte-tools.workspace = true
+norte-code-plugin-host.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+
+[lints]
+workspace = true
