@@ -9,6 +9,10 @@ use norte::AnyFunction;
 use norte_code_plugin_host::plugins::{PLUGIN_ABI_VERSION, Plugin};
 use norte_tools::browser_tool;
 
+mod screenshot_effect;
+
+use screenshot_effect::ScreenshotEffectTool;
+
 #[derive(Default)]
 struct BrowserPlugin;
 
@@ -18,7 +22,7 @@ impl Plugin for BrowserPlugin {
     }
 
     fn tools(&self) -> Vec<Arc<dyn AnyFunction>> {
-        vec![browser_tool()]
+        vec![Arc::new(ScreenshotEffectTool::new(browser_tool()))]
     }
 }
 
