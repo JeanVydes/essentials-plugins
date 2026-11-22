@@ -2,7 +2,8 @@ use super::*;
 
 #[test]
 fn the_plugin_declares_the_browser_tool() {
-    let tools = BrowserPlugin.tools();
+    let plugin = BrowserPlugin::new().expect("plugin");
+    let tools = plugin.tools();
     assert_eq!(tools.len(), 1);
     assert_eq!(tools[0].name(), "browser_use");
 

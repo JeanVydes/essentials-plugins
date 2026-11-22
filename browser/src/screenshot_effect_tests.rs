@@ -9,6 +9,7 @@ use schemars::Schema;
 use serde_json::{Value, json};
 
 use super::ScreenshotEffectTool;
+use crate::plugin_runtime::PluginRuntime;
 
 #[derive(schemars::JsonSchema)]
 struct Arguments {}
@@ -43,14 +44,25 @@ impl AnyFunction for FakeTool {
 }
 
 fn wrapped(output: ToolOutput) -> ScreenshotEffectTool {
-    ScreenshotEffectTool::new(Arc::new(FakeTool {
-        output,
-        schema: schemars::schema_for!(Arguments),
-    }))
+    let runtime = PluginRuntime::new().expect("plugin runtime");
+    ScreenshotEffectTool::new(
+        Arc::new(FakeTool {
+            output,
+            schema: schemars::schema_for!(Arguments),
+        }),
+        runtime,
+    )
 }
 
-#[tokio::test]
-async fn a_screenshot_becomes_an_inline_image_effect() {
+fn driver() -> tokio::runtime::Runtime {
+    tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .expect("driver runtime")
+}
+
+#[test]
+fn a_screenshot_becomes_an_inline_image_effect() {
     let bytes = vec![1, 2, 3, 4];
     let encoded = base64::engine::general_purpose::STANDARD.encode(&bytes);
     let tool = wrapped(ToolOutput {
@@ -60,9 +72,8 @@ async fn a_screenshot_becomes_an_inline_image_effect() {
     });
     assert_eq!(tool.name(), "browser_use");
 
-    let mut output = tool
-        .execute(&ToolContext::new(), &json!({}))
-        .await
+    let mut output = driver()
+        .block_on(tool.execute(&ToolContext::new(), &json!({})))
         .expect("execute");
     let effects = HostEffects::extract(&mut output)
         .expect("envelope")
@@ -83,8 +94,8 @@ async fn a_screenshot_becomes_an_inline_image_effect() {
     );
 }
 
-#[tokio::test]
-async fn an_output_without_a_screenshot_keeps_no_effect() {
+#[test]
+fn an_output_without_a_screenshot_keeps_no_effect() {
     let original = json!({"message": "clicked"});
     let tool = wrapped(ToolOutput {
         parts: vec![Part::text("clicked")],
@@ -92,9 +103,8 @@ async fn an_output_without_a_screenshot_keeps_no_effect() {
         is_error: false,
     });
 
-    let mut output = tool
-        .execute(&ToolContext::new(), &json!({}))
-        .await
+    let mut output = driver()
+        .block_on(tool.execute(&ToolContext::new(), &json!({})))
         .expect("execute");
     assert!(
         HostEffects::extract(&mut output)
@@ -104,8 +114,8 @@ async fn an_output_without_a_screenshot_keeps_no_effect() {
     assert_eq!(output.structured, Some(original));
 }
 
-#[tokio::test]
-async fn a_bad_screenshot_keeps_the_tool_result_without_an_effect() {
+#[test]
+fn a_bad_screenshot_keeps_the_tool_result_without_an_effect() {
     let original = json!({"screenshot_base64": "not base64!"});
     let tool = wrapped(ToolOutput {
         parts: vec![Part::text("screenshot failed")],
@@ -113,9 +123,8 @@ async fn a_bad_screenshot_keeps_the_tool_result_without_an_effect() {
         is_error: false,
     });
 
-    let mut output = tool
-        .execute(&ToolContext::new(), &json!({}))
-        .await
+    let mut output = driver()
+        .block_on(tool.execute(&ToolContext::new(), &json!({})))
         .expect("execute");
     assert!(
         HostEffects::extract(&mut output)

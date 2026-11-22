@@ -15,7 +15,7 @@ norte-tools = { git = "https://github.com/JeanVydes/Norte.git", branch = "dev" }
 norte-code-plugin-host = { git = "https://github.com/JeanVydes/NorteCode.git", branch = "dev" }
 schemars = "1"
 serde_json = "1"
-tokio = { version = "1", features = ["macros", "rt"] }
+tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "time"] }
 tracing = "0.1"
 
 [workspace.lints.rust]

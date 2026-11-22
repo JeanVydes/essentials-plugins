@@ -11,16 +11,19 @@ use norte_code_plugin_host::{HostEffects, UserMessageDraft};
 use schemars::Schema;
 use serde_json::Value;
 
+use super::plugin_runtime::PluginRuntime;
+
 const SCREENSHOT_FIELD: &str = "screenshot_base64";
 
 #[derive(Debug)]
 pub(super) struct ScreenshotEffectTool {
     inner: Arc<dyn AnyFunction>,
+    runtime: PluginRuntime,
 }
 
 impl ScreenshotEffectTool {
-    pub(super) fn new(inner: Arc<dyn AnyFunction>) -> Self {
-        Self { inner }
+    pub(super) fn new(inner: Arc<dyn AnyFunction>, runtime: PluginRuntime) -> Self {
+        Self { inner, runtime }
     }
 
     fn screenshot(output: &ToolOutput) -> Option<&str> {
@@ -65,7 +68,8 @@ impl AnyFunction for ScreenshotEffectTool {
     }
 
     async fn execute(&self, context: &ToolContext, arguments: &Value) -> Result<ToolOutput> {
-        let output = self.inner.execute(context, arguments).await?;
+        let execution = self.runtime.wrap(self.inner.execute(context, arguments));
+        let output = execution.await?;
         let Some(data) = Self::screenshot(&output) else {
             return Ok(output);
         };

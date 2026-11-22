@@ -18,10 +18,8 @@ norte-tools.workspace = true
 norte-code-plugin-host.workspace = true
 schemars.workspace = true
 serde_json.workspace = true
-tracing.workspace = true
-
-[dev-dependencies]
 tokio.workspace = true
+tracing.workspace = true
 
 [lints]
 workspace = true
