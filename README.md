@@ -14,7 +14,7 @@ The implementation stays in Norte. This plugin only returns the tool to the
 host; Norte Code registers it, applies tool rules and reports its origin.
 
 ```sh
-norte-code plugins add https://github.com/JeanVydes/essentials-plugins --package essentials-plugin-browser
+norte service plugins add https://github.com/JeanVydes/essentials-plugins --package essentials-plugin-browser
 ```
 
 Restart `norte` after installing, updating or removing a plugin. Norte Code
