@@ -844,7 +844,7 @@ dependencies = [
 [[package]]
 name = "norte-code-plugin-host"
 version = "0.1.0"
-source = "git+https://github.com/JeanVydes/NorteCode.git?branch=dev#def918431849a5933f093cd6b2b6332aed62fc77"
+source = "git+https://github.com/JeanVydes/NorteCode.git?branch=dev#2ad2f74e59a9aa63bde3ba6d8aa94dd76c4ec46c"
 dependencies = [
  "async-trait",
  "libloading",
@@ -858,7 +858,7 @@ dependencies = [
 [[package]]
 name = "norte-code-wire"
 version = "0.1.0"
-source = "git+https://github.com/JeanVydes/NorteCode.git?branch=dev#def918431849a5933f093cd6b2b6332aed62fc77"
+source = "git+https://github.com/JeanVydes/NorteCode.git?branch=dev#2ad2f74e59a9aa63bde3ba6d8aa94dd76c4ec46c"
 dependencies = [
  "base64 0.22.1",
  "schemars",
