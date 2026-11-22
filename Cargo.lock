@@ -812,7 +812,7 @@ dependencies = [
 [[package]]
 name = "norte"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "norte-anthropic",
  "norte-core",
@@ -827,7 +827,7 @@ dependencies = [
 [[package]]
 name = "norte-anthropic"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -869,7 +869,7 @@ dependencies = [
 [[package]]
 name = "norte-core"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -892,7 +892,7 @@ dependencies = [
 [[package]]
 name = "norte-gemini"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -909,7 +909,7 @@ dependencies = [
 [[package]]
 name = "norte-http"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "bytes",
@@ -929,7 +929,7 @@ dependencies = [
 [[package]]
 name = "norte-macros"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -939,7 +939,7 @@ dependencies = [
 [[package]]
 name = "norte-mcp"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -957,7 +957,7 @@ dependencies = [
 [[package]]
 name = "norte-openai"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -974,7 +974,7 @@ dependencies = [
 [[package]]
 name = "norte-tools"
 version = "0.0.2"
-source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#4d694cbcaaad75f8e81a00d35448da6de6e335b9"
+source = "git+https://github.com/JeanVydes/Norte.git?branch=dev#f9f398e41d6ee7814f398c8ce6c32bbaec255280"
 dependencies = [
  "async-trait",
  "chrono",
